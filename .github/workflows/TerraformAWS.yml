@@ -2,19 +2,26 @@ name: 'Terraform GitHub Actions'
 on:
   - push
 jobs:
-  terraform:
-    name: 'Terraform'
-    runs-on: ubuntu-latest
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-18.04
+    
+    permissions:
+      id-token: write
+      contents: read
     steps:
+      - uses: actions/checkout@v2
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::906861352598:role/gh
+          region: us-east-1
+
       - name: 'Checkout'
         uses: actions/checkout@master
       - name: 'Terraform Init'
         run: cd terraform && terraform init
       - name: 'Terraform Plan'
         run: terraform plan
-        env:
-          TF_VAR_AWS_TOKEN: ${{ secrets.AWS_TOKEN }}
       - name: 'Terraform Apply'
         run: terraform apply -auto-approve
-        env:
-          TF_VAR_AWS_TOKEN: ${{ secrets.AWS_TOKEN }}
