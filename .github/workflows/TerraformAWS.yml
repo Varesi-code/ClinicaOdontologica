@@ -15,7 +15,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: arn:aws:iam::906861352598:role/gh
-          aws_region: us-east-1
+          aws-region: us-east-1
 
       - name: 'Checkout'
         uses: actions/checkout@master
