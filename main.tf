@@ -54,43 +54,44 @@ resource "aws_route_table" "Public_RT" {
 }
 
     #tabla de ruteo para la subred privada
-    resource "aws_route_table" "Private_RT" {
-        vpc_id = aws_vpc.Main.id
-        route {
-            cidr_block = "0.0.0.0/0"
-            #Declaramos el trafico desde la subred privada hacia el gateway
-            # a internet mediante NAT Gateway
-            gateway_id = aws_internet_gateway.IGW.id        
-        }
-        tags = {
-            Name = "Tabla de Ruteo Privada"
-        }
-
-        #Asociamos la subred publica al route table
-        resource "aws_route_table_association" "public_RT_association" {
-            subnet_id = aws_subnet.public_subnets.id
-            route_table_id = aws_route_table.Public_RT.id
-        }
-
-        #Asociamos la subred privada al route table
-        resource "aws_route_table_association" "private_RT_association" {
-            subnet_id = aws_subnet.private_subnets.id
-            route_table_id = aws_route_table.Private_RT.id
-        }
-        
-        resource "aws_eip" "NAT_EIP" {
-            vpc = true
-            tags = {
-                Name = "NATcon elastic IP"
-            }
-        }
-
-        #Creamos el NAT Gateway
-        resource "aws_nat_gateway" "NAT_GW" {
-            allocation_id = aws_eip.NAT_EIP.id
-            subnet_id = aws_subnet.private_subnets.id
-            tags = {
-                Name = "NAT Gateway alocada en la subred publica"
-            }
-        }
+resource "aws_route_table" "Private_RT" {
+    vpc_id = aws_vpc.Main.id
+    route {
+    cidr_block = "0.0.0.0/0"
+    #Declaramos el trafico desde la subred privada hacia el gateway
+    # a internet mediante NAT Gateway
+    gateway_id = aws_internet_gateway.IGW.id        
+    }
+    tags = {
+        Name = "Tabla de Ruteo Privada"
+    }
 }
+
+#Asociamos la subred publica al route table
+resource "aws_route_table_association" "public_RT_association" {
+    subnet_id = aws_subnet.public_subnets.id
+    route_table_id = aws_route_table.Public_RT.id
+}
+
+#Asociamos la subred privada al route table
+resource "aws_route_table_association" "private_RT_association" {
+    subnet_id = aws_subnet.private_subnets.id
+    route_table_id = aws_route_table.Private_RT.id
+}
+        
+resource "aws_eip" "NAT_EIP" {
+    vpc = true
+    tags = {
+        Name = "NATcon elastic IP"
+    }
+}
+
+#Creamos el NAT Gateway
+resource "aws_nat_gateway" "NAT_GW" {
+    allocation_id = aws_eip.NAT_EIP.id
+    subnet_id = aws_subnet.private_subnets.id
+    tags = {
+        Name = "NAT Gateway alocada en la subred publica"
+    }
+}
+
