@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Pacientes</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/get_paciente.js"></script>
+    <script type="text/javascript" src="/js/put_paciente.js"></script>
+    <script type="text/javascript" src="/js/delete_paciente.js"></script>
+</head>
+<body>
+<header class="header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Clinica Odontologica 🦷  </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Odontologos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                        <a class="dropdown-item" href="/odontologoAlta.html">Nuevo odontologo</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/odontologosLista.html">Nuestros Oontologos</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Pacientes
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/pacienteAlta.html">Nuevo paciente</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/pacientesLista.html">Nuestros pacientes</a>
+
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Turnos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/turnoAlta.html">Nuevo turno</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/turnosLista.html">Ver turnos</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Mi Sesion
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/logout">Cerrar Sesion </a>
+                    </div>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+</header>
+<br>
+<div class="container">
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link" href="/">Agregar nuevo Paciente</a>
+        </li>
+    </ul>
+
+    <div id="div_paciente_table">
+        <h1>Pacientes</h1>
+        <div class="row col-md-6 table-responsive">
+            <table id="pacienteTable" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>DNI</th>
+                    <th>Fecha Ingreso</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6" style="display: none;
+											background-color:#e6fffa; padding:10px; border-radius:3px"
+             id="div_paciente_updating">
+            <form id="update_paciente_form">
+                <div class="form-group">
+                    <label >Id:</label>
+                    <input type="text" class="form-control" id="id" readonly>
+                </div>
+                <div class="form-group">
+                    <label >Nombre:</label>
+                    <input type="text" class="form-control" placeholder="Nombre" id="nombre">
+                </div>
+                <div class="form-group">
+                    <label >Apellido:</label>
+                    <input type="text" class="form-control" placeholder="Apellido" id="apellido">
+                </div>
+
+                <div class="form-group">
+                    <label >DNI:</label>
+                    <input type="text" class="form-control" placeholder="DNI" id="dni">
+                </div>
+
+                <div class="form-group">
+                    <label >Fecha Ingreso:</label>
+                    <input type="text" class="form-control" placeholder="FechaIngreso" id="fecha">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Modificar</button>
+            </form>
+            <div id="response" style="display:none; margin:10px">
+            </div>
+        </div>
+    </div>
+    <hr>
+</div>
+
+
+</body>
+</html>

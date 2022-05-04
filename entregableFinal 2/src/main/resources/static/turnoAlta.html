@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Turnos</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/post_turno.js"></script>
+</head>
+<body>
+<header class="header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Clinica Odontologica 🦷  </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Odontologos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                        <a class="dropdown-item" href="/odontologoAlta.html">Nuevo odontologo</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/odontologosLista.html">Nuestros Oontologos</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Pacientes
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/pacienteAlta.html">Nuevo paciente</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/pacientesLista.html">Nuestros pacientes</a>
+
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Turnos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/turnoAlta.html">Nuevo turno</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/turnosLista.html">Ver turnos</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Mi Sesion
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/logout">Cerrar Sesion </a>
+                    </div>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+</header>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-7" style="background-color:#e6fffa; padding:10px; border-radius:3px">
+            <h3>Registrar turno</h3>
+            <form id="add_turno">
+                <div class="form-group">
+                    <label class="control-label" for="fecha">Fecha:</label>
+                    <input type="text" class="form-control" id="fecha"
+                           placeholder="yyyy-MM-dd" name="fecha" required></input>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="hora">Hora:</label>
+                    <input type="text" class="form-control" id="hora"
+                           placeholder="HH:MM" name="hora" required></input>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="id-pac">Id Paciente:</label>
+                    <input type="text" class="form-control" id="id-pac"
+                           placeholder="ej: 1" name="id-pac" required></input>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label" for="id-odo">Id Odontologo:</label>
+                    <input type="text" class="form-control" id="id-odo"
+                           placeholder="ej: 1" name="id-odo" required></input>
+                </div>
+
+
+                <button type="submit" class="btn btn-danger" id="btn-add-turno">Guardar</button>
+            </form>
+            <div id="response" style="display:none; margin-top:10px">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

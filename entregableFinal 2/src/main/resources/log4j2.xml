@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--the root element of a log4j2 configuration file;
+the status attribute represents the level at which internal log4j events should be logged -->
+<Configuration status="WARN">
+    <!-- Appenders: this element contains a list of appenders -->
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <!-- Let’s look at an example of configuring a PatternLayout that configures log lines to show the date, thread, log level and log message with different colors for different log levels-->
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t]
+      %highlight{%level}{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=green, DEBUG=blue} - %msg%n" />
+        </Console>
+        <!--https://stackify.com/java-logging-best-practices/ -->
+        <!-- Logging everything into a single file is, of course, not ideal. It’s usually much better to roll over the active log file regularly –
+         which is exactly what the RollingFileAppender does. -->
+        <RollingFile name="RollingFileAppender" fileName="app.log"
+                     filePattern="logs/${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <!-- the layouts are used by appenders to define how a log message will be formatted.
+            Here’s a brief description of some of the more commonly used layouts that log4j2 offers:
+            PatternLayout – configures messages according to a String pattern
+            JsonLayout – defines a JSON format for log messages
+            CsvLayout – can be used to create messages in a CSV format -->
+            <PatternLayout>
+                <Pattern>%d [%t] %p %c - %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <!-- OnStartupTriggeringPolicy – a new log file is created every time the JVM starts
+                      TimeBasedTriggeringPolicy – the log file is rolled based on a date/time pattern
+                      SizeBasedTriggeringPolicy – the file is rolled when it reaches a certain size -->
+                <OnStartupTriggeringPolicy />
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="50 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20" />
+        </RollingFile>
+
+        <!-- As the name suggests, this appender uses JDBC to write logs to a relational database.
+        For this configuration, you need to define a ConnectionSource, which can be either a
+        JNDI Data Source or a custom ConnectionFactory.
+        The logger uses the ConnectionSource to get JDBC connections,
+        which is why it’s important to use a connection pool for better performance.
+
+        <JDBC name="JDBCAppender" tableName="logs">
+        <DataSource jndiName="java:/comp/env/jdbc/LoggingDataSource" />
+        <Column name="date" isEventTimestamp="true" />
+        <Column name="logger" pattern="%logger" />
+        <Column name="level" pattern="%level" />
+        <Column name="message" pattern="%message" />
+        <Column name="exception" pattern="%ex{full}" />
+    </JDBC> -->
+
+    </Appenders>
+    <!-- Loggers: this element contains a list of Logger instances.
+    The Root element is a standard logger that outputs all messages -->
+    <Loggers>
+        <!-- mandatory -->
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+        </Root>
+        <!-- Besides the Root logger, we can also define additional Logger elements
+        with different log levels, appenders or filters.
+        Each Logger requires a name that can be used later to reference it: -->
+        <Logger name="RollingFileLogger">
+            <AppenderRef ref="RollingFileAppender" />
+            <!-- To write log messages using this particular Logger, you can obtain a reference to it using the LogManager class:
+            Logger logger = LogManager.getLogger("RollingFileLogger");
+            logger.info("User info updated");
+            Another very common way to structure the hierarchy of these loggers is based on the Java class:
+            Logger logger = LogManager.getLogger(MyServiceTest.class); -->
+        </Logger>
+    </Loggers>
+</Configuration>
+
+<!-- The built-in log levels for log4j2 are:
+
+OFF 0
+FATAL 100
+ERROR 200
+WARN 300
+INFO 400
+DEBUG 500
+TRACE 550
+ALL Integer.MAX_VALUE
+ -->
+
+        <!--basado en https://stackify.com/log4j2-java/ -->
