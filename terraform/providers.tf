@@ -13,7 +13,5 @@ terraform {
 }
 provider "aws" {
 
-shared_credentials_file = var.AWS_TOKEN
-
 region = var.aws_region
 }
