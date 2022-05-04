@@ -3,7 +3,7 @@ resource "aws_vpc" "Main" {
     # usamos el bloque "resource", el "provider element" y una "etiqueta"
     # para indicarle a terraform que queremos crear un recurso de tipo "aws_vpc"
     # y que este recurso se llamará "Main".
-        cidr_block = var.main_vpc_cidr
+        cidr_block = var.aws_vpc_cidr
         tags = {
             Name = "Main"
         }
