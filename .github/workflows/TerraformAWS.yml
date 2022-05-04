@@ -1,0 +1,20 @@
+name: 'Terraform GitHub Actions'
+on:
+  - push
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@master
+      - name: 'Terraform Init'
+        run: terraform init
+      - name: 'Terraform Plan'
+        run: terraform plan
+        env:
+          TF_VAR_AWS_TOKEN: ${{ secrets.AWS_TOKEN }}
+      - name: 'Terraform Apply'
+        run: terraform apply -auto-approve
+        env:
+          TF_VAR_AWS_TOKEN: ${{ secrets.AWS_TOKEN }}

@@ -22,3 +22,8 @@ variable "private_subnet" {
   default = "10.0.0.192/26"  
 }
 
+variable "AWS_TOKEN"{
+  description = "AWS Token"
+  type = string
+  default = AWS_TOKEN
+}
