@@ -1,6 +1,7 @@
 #
 FROM maven:3.6.3-jdk-8 as BUILD
 COPY src /home/app/src
+RUN pwd && ls -lstr
 COPY pom.xml /home/app/pom.xml
 RUN mvn -f /home/app/pom.xml clean package
 
