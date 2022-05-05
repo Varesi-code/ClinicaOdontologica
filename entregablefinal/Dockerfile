@@ -1,9 +1,8 @@
 #
 FROM maven:3.6.3-jdk-8 as BUILD
-COPY src /home/app/src
-RUN pwd && ls -lstr
-COPY pom.xml /home/app/pom.xml
-RUN mvn -f /home/app/pom.xml clean package
+COPY target/app-0.0.1-SNAPSHOT.jar app.jar
+COPY entregablefinal/pom.xml pom.xml
+RUN mvn -f /entregablefinal/pom.xml clean package
 
 EXPOSE 8080
 
