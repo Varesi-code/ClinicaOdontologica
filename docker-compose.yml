@@ -38,9 +38,8 @@ services:
       - h2-data:/opt/h2-data
   volumes:
     -h2-data:
-    
     healthcheck:
-          test: ["CMD", "h2", "-h", "localhost", "-P", "3306", "-u", "root", "--password=root", "-e", "select 1", "DOCKERDB"]
+          test: ["CMD", "mysql", "-h", "localhost", "-P", "3306", "-u", "root", "--password=root", "-e", "select 1", "DOCKERDB"]
           interval: 1s
           timeout: 3s
           retries: 30
