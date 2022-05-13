@@ -1,4 +1,4 @@
-name: 'Terraform GitHub Actions'
+name: 'CICD'
 on:
   - push
 jobs:
@@ -20,7 +20,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest    
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/realia:clinica    
   deploy:
     needs: build
     name: Deploy
@@ -45,6 +45,7 @@ jobs:
         run: terraform plan
       - name: 'Terraform Apply'
         run: terraform apply -auto-approve
+        
       - name: 'Terraform Destroy'
         run: terraform destroy -auto-approve
         
